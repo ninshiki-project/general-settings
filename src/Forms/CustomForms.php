@@ -21,7 +21,7 @@ class CustomForms
                 $fields[] = TextInput::make($fieldKey)
                     ->label(__($field['label']))
                     ->placeholder(__($field['placeholder']))
-                    ->required(array_key_exists('required', $field) ? $field['required'] : false)
+                    ->required(array_key_exists('required', $field))
                     ->rules(array_key_exists('rules', $field) ? $field['rules'] : []);
 
             } elseif ($field['type'] === TypeFieldEnum::Boolean) {
@@ -35,7 +35,7 @@ class CustomForms
                     ->label(__($field['label']))
                     ->placeholder(__($field['placeholder']))
                     ->options($field['options'])
-                    ->required(array_key_exists('required', $field) ? $field['required'] : false);
+                    ->required(array_key_exists('required', $field));
 
             } elseif ($field['type'] === TypeFieldEnum::Textarea) {
 
@@ -43,13 +43,13 @@ class CustomForms
                     ->label(__($field['label']))
                     ->placeholder(__($field['placeholder']))
                     ->rows($field['rows'])
-                    ->required(array_key_exists('required', $field) ? $field['required'] : false);
+                    ->required(array_key_exists('required', $field));
             } elseif ($field['type'] === TypeFieldEnum::Datetime) {
 
                 $fields[] = DateTimePicker::make($fieldKey)
                     ->label(__($field['label']))
                     ->placeholder(__($field['placeholder']))
-                    ->seconds(array_key_exists('required', $field) ? $field['required'] : false);
+                    ->seconds(array_key_exists('required', $field));
             }
         }
 
