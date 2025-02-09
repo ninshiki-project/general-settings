@@ -114,7 +114,7 @@ class GeneralSettingsPage extends Page
     {
         $arrTabs = [];
 
-        if (config('general-settings.show_application_tab')) {
+        if (config('general-settings.show_application_tab', false)) {
             $arrTabs[] = Tabs\Tab::make('Application Tab')
                 ->label(__('general-settings::default.application'))
                 ->icon('heroicon-o-tv')
@@ -122,14 +122,14 @@ class GeneralSettingsPage extends Page
                 ->columns(3);
         }
 
-        if (config('general-settings.show_analytics_tab')) {
+        if (config('general-settings.show_analytics_tab', false)) {
             $arrTabs[] = Tabs\Tab::make('Analytics Tab')
                 ->label(__('general-settings::default.analytics'))
                 ->icon('heroicon-o-globe-alt')
                 ->schema(AnalyticsFieldsForm::get());
         }
 
-        if (config('general-settings.show_seo_tab')) {
+        if (config('general-settings.show_seo_tab', false)) {
             $arrTabs[] = Tabs\Tab::make('Seo Tab')
                 ->label(__('general-settings::default.seo'))
                 ->icon('heroicon-o-window')
@@ -137,7 +137,7 @@ class GeneralSettingsPage extends Page
                 ->columns(1);
         }
 
-        if (config('general-settings.show_email_tab')) {
+        if (config('general-settings.show_email_tab', false)) {
             $arrTabs[] = Tabs\Tab::make('Email Tab')
                 ->label(__('general-settings::default.email'))
                 ->icon('heroicon-o-envelope')
@@ -145,7 +145,7 @@ class GeneralSettingsPage extends Page
                 ->columns(3);
         }
 
-        if (config('general-settings.show_social_networks_tab')) {
+        if (config('general-settings.show_social_networks_tab', false)) {
             $arrTabs[] = Tabs\Tab::make('Social Network Tab')
                 ->label(__('general-settings::default.social_networks'))
                 ->icon('heroicon-o-heart')
