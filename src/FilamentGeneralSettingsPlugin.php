@@ -25,6 +25,8 @@ class FilamentGeneralSettingsPlugin implements Plugin
 
     public Closure | string $navigationLabel = '';
 
+    public Closure | string $navigationParentItem = '';
+
     public function getId(): string
     {
         return 'filament-general-settings';
@@ -106,6 +108,13 @@ class FilamentGeneralSettingsPlugin implements Plugin
         return $this;
     }
 
+    public function setNavigationParentItem(Closure | string $value = ''): static
+    {
+        $this->navigationParentItem = $value;
+
+        return $this;
+    }
+
     public function getNavigationGroup(): ?string
     {
         return ! empty($this->navigationGroup) ? $this->evaluate($this->navigationGroup) : null;
@@ -133,5 +142,10 @@ class FilamentGeneralSettingsPlugin implements Plugin
     public function getNavigationLabel(): ?string
     {
         return ! empty($this->navigationLabel) ? $this->evaluate($this->navigationLabel) : null;
+    }
+
+    public function getNavigationParentItem(): ?string
+    {
+        return $this->navigationParentItem ?? null;
     }
 }

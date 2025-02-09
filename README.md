@@ -29,7 +29,7 @@ Create really fast and easily general settings for your Laravel Filament project
 You can install the package via composer:
 
 ```bash
-composer require joaopaulolndev/filament-general-settings
+composer require ninshiki-project/filament-general-settings
 ```
 
 You can publish and run the migrations with:

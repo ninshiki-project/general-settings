@@ -73,6 +73,13 @@ class GeneralSettingsPage extends Page
         return $plugin->getNavigationLabel() ?? __('filament-general-settings::default.title');
     }
 
+    public static function getNavigationParentItem(): ?string
+    {
+        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+
+        return $plugin->getNavigationParentItem();
+    }
+
     public ?array $data = [];
 
     public function mount(): void
