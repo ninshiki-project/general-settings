@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class FilamentGeneralSettingsCommand extends Command
 {
-    public $signature = 'filament-general-settings';
+    public $signature = 'general-settings';
 
     public $description = 'My command';
 

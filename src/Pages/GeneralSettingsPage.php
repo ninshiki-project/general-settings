@@ -43,44 +43,44 @@ class GeneralSettingsPage extends Page
      */
     public static function getNavigationIcon(): ?string
     {
-        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+        $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');
 
         return $plugin->getIcon();
     }
 
     public static function getNavigationSort(): ?int
     {
-        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+        $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');
 
         return $plugin->getSort();
     }
 
     public static function canAccess(): bool
     {
-        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+        $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');
 
         return $plugin->getCanAccess();
     }
 
     public static function getNavigationLabel(): string
     {
-        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+        $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');
 
-        return $plugin->getNavigationLabel() ?? __('filament-general-settings::default.title');
+        return $plugin->getNavigationLabel() ?? __('general-settings::default.title');
     }
 
     public static function getNavigationParentItem(): ?string
     {
-        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+        $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');
 
         return $plugin->getNavigationParentItem();
     }
 
     public function getTitle(): string
     {
-        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+        $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');
 
-        return $plugin->getTitle() ?? __('filament-general-settings::default.title');
+        return $plugin->getTitle() ?? __('general-settings::default.title');
     }
 
     public function mount(): void
@@ -110,48 +110,48 @@ class GeneralSettingsPage extends Page
     {
         $arrTabs = [];
 
-        if (config('filament-general-settings.show_application_tab')) {
+        if (config('general-settings.show_application_tab')) {
             $arrTabs[] = Tabs\Tab::make('Application Tab')
-                ->label(__('filament-general-settings::default.application'))
+                ->label(__('general-settings::default.application'))
                 ->icon('heroicon-o-tv')
                 ->schema(ApplicationFieldsForm::get())
                 ->columns(3);
         }
 
-        if (config('filament-general-settings.show_analytics_tab')) {
+        if (config('general-settings.show_analytics_tab')) {
             $arrTabs[] = Tabs\Tab::make('Analytics Tab')
-                ->label(__('filament-general-settings::default.analytics'))
+                ->label(__('general-settings::default.analytics'))
                 ->icon('heroicon-o-globe-alt')
                 ->schema(AnalyticsFieldsForm::get());
         }
 
-        if (config('filament-general-settings.show_seo_tab')) {
+        if (config('general-settings.show_seo_tab')) {
             $arrTabs[] = Tabs\Tab::make('Seo Tab')
-                ->label(__('filament-general-settings::default.seo'))
+                ->label(__('general-settings::default.seo'))
                 ->icon('heroicon-o-window')
                 ->schema(SeoFieldsForm::get($this->data))
                 ->columns(1);
         }
 
-        if (config('filament-general-settings.show_email_tab')) {
+        if (config('general-settings.show_email_tab')) {
             $arrTabs[] = Tabs\Tab::make('Email Tab')
-                ->label(__('filament-general-settings::default.email'))
+                ->label(__('general-settings::default.email'))
                 ->icon('heroicon-o-envelope')
                 ->schema(EmailFieldsForm::get())
                 ->columns(3);
         }
 
-        if (config('filament-general-settings.show_social_networks_tab')) {
+        if (config('general-settings.show_social_networks_tab')) {
             $arrTabs[] = Tabs\Tab::make('Social Network Tab')
-                ->label(__('filament-general-settings::default.social_networks'))
+                ->label(__('general-settings::default.social_networks'))
                 ->icon('heroicon-o-heart')
                 ->schema(SocialNetworkFieldsForm::get())
                 ->columns(2)
                 ->statePath('social_network');
         }
 
-        if (config('filament-general-settings.show_custom_tabs')) {
-            foreach (config('filament-general-settings.custom_tabs') as $key => $customTab) {
+        if (config('general-settings.show_custom_tabs')) {
+            foreach (config('general-settings.custom_tabs') as $key => $customTab) {
                 $arrTabs[] = Tabs\Tab::make($customTab['label'])
                     ->label(__($customTab['label']))
                     ->icon($customTab['icon'])
@@ -172,7 +172,7 @@ class GeneralSettingsPage extends Page
     public function update(): void
     {
         $data = $this->form->getState();
-        if (config('filament-general-settings.show_email_tab')) {
+        if (config('general-settings.show_email_tab')) {
             $data = EmailDataHelper::setEmailConfigToDatabase($data);
         }
         $data = $this->clearVariables($data);
@@ -180,7 +180,7 @@ class GeneralSettingsPage extends Page
         GeneralSetting::updateOrCreate([], $data);
         Cache::forget('general_settings');
 
-        $this->successNotification(__('filament-general-settings::default.settings_saved'));
+        $this->successNotification(__('general-settings::default.settings_saved'));
         redirect(request()?->header('Referer'));
     }
 
@@ -232,12 +232,12 @@ class GeneralSettingsPage extends Page
                     'body' => 'This is for testing email using smtp.',
                 ]));
         } catch (Exception $e) {
-            $this->errorNotification(__('filament-general-settings::default.test_email_error'), $e->getMessage());
+            $this->errorNotification(__('general-settings::default.test_email_error'), $e->getMessage());
 
             return;
         }
 
-        $this->successNotification(__('filament-general-settings::default.test_email_success') . $email);
+        $this->successNotification(__('general-settings::default.test_email_success') . $email);
     }
 
     private function errorNotification(string $title, string $body): void
@@ -255,7 +255,7 @@ class GeneralSettingsPage extends Page
     {
         return [
             Actions\Action::make('Save')
-                ->label(__('filament-general-settings::default.save'))
+                ->label(__('general-settings::default.save'))
                 ->color('primary')
                 ->submit('Update'),
         ];
