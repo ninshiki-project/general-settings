@@ -161,12 +161,12 @@ Add in AdminPanelProvider.php
 
 ```php
 
-use ninshikiProject\GeneralSettings\FilamentGeneralSettingsPlugin;
+use ninshikiProject\GeneralSettings\GeneralSettingsPlugin;
 
 ...
 
 ->plugins([
-    FilamentGeneralSettingsPlugin::make()
+    GeneralSettingsPlugin::make()
 ])
 ```
 
@@ -175,7 +175,7 @@ can use the following example:
 
 ```php
 ->plugins([
-    FilamentGeneralSettingsPlugin::make()
+    GeneralSettingsPlugin::make()
         ->canAccess(fn() => auth()->user()->id === 1)
         ->setSort(3)
         ->setIcon('heroicon-o-cog')
