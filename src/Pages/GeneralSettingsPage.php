@@ -39,6 +39,13 @@ class GeneralSettingsPage extends Page
         return $plugin->getNavigationGroup();
     }
 
+    public function getSubHeading(): ?string
+    {
+        $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');
+
+        return $plugin->getDescription();
+    }
+
     /**
      * @throws Exception
      */

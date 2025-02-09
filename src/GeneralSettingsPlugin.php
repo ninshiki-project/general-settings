@@ -27,6 +27,8 @@ class GeneralSettingsPlugin implements Plugin
 
     public Closure | string | null $navigationParentItem = '';
 
+    public ?string $subHeading = '';
+
     public static function make(): static
     {
         return app(static::class);
@@ -140,6 +142,18 @@ class GeneralSettingsPlugin implements Plugin
     public function getNavigationParentItem(): ?string
     {
         return $this->navigationParentItem ?? null;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->subHeading ?? '';
+    }
+
+    public function setDescription(Closure | string $value = ''): static
+    {
+        $this->subHeading = $value;
+
+        return $this;
     }
 
     public function setNavigationParentItem(Closure | string $value = ''): static
