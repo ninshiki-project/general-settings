@@ -1,8 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Database\Factories;
-
-use Illuminate\Database\Eloquent\Factories\Factory;
+namespace ninshikiProject\GeneralSettings\Database\Factories;
 
 /*
 class ModelFactory extends Factory

@@ -1,6 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Services;
+namespace ninshikiProject\GeneralSettings\Services;
 
 class MailSettingsService
 {

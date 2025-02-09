@@ -1,6 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Traits;
+namespace ninshikiProject\GeneralSettings\Traits;
 
 trait WithOptions
 {

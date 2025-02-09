@@ -27,7 +27,7 @@ const defaultOptions = {
     minify: !isDev,
     plugins: [{
         name: 'watchPlugin',
-        setup: function (build) {
+        setup: function(build) {
             build.onStart(() => {
                 console.log(`Build started at ${new Date(Date.now()).toLocaleTimeString()}: ${build.initialOptions.outfile}`)
             })
@@ -39,12 +39,12 @@ const defaultOptions = {
                     console.log(`Build finished at ${new Date(Date.now()).toLocaleTimeString()}: ${build.initialOptions.outfile}`)
                 }
             })
-        }
+        },
     }],
 }
 
 compile({
     ...defaultOptions,
     entryPoints: ['./resources/js/index.js'],
-    outfile: './resources/dist/filament-general-settings.js',
+    outfile: './resources/dist/general-settings.js',
 })

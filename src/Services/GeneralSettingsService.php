@@ -1,9 +1,9 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Services;
+namespace ninshikiProject\GeneralSettings\Services;
 
 use Illuminate\Support\Facades\Cache;
-use Joaopaulolndev\FilamentGeneralSettings\Models\GeneralSetting;
+use ninshikiProject\GeneralSettings\Models\GeneralSetting;
 
 class GeneralSettingsService
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Commands;
+namespace ninshikiProject\GeneralSettings\Commands;
 
 use Illuminate\Console\Command;
 

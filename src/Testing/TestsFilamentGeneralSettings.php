@@ -1,6 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Testing;
+namespace ninshikiProject\GeneralSettings\Testing;
 
 use Livewire\Features\SupportTesting\Testable;
 

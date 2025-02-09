@@ -1,8 +1,8 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Helpers;
+namespace ninshikiProject\GeneralSettings\Helpers;
 
-use Joaopaulolndev\FilamentGeneralSettings\Enums\SocialNetworkEnum;
+use ninshikiProject\GeneralSettings\Enums\SocialNetworkEnum;
 
 class SocialNetworkDataHelper
 {

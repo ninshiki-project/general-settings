@@ -1,13 +1,13 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Forms;
+namespace ninshikiProject\GeneralSettings\Forms;
 
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Joaopaulolndev\FilamentGeneralSettings\Enums\TypeFieldEnum;
+use ninshikiProject\GeneralSettings\Enums\TypeFieldEnum;
 
 class CustomForms
 {

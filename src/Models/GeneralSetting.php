@@ -1,6 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Models;
+namespace ninshikiProject\GeneralSettings\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

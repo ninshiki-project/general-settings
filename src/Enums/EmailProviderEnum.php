@@ -1,8 +1,8 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Enums;
+namespace ninshikiProject\GeneralSettings\Enums;
 
-use Joaopaulolndev\FilamentGeneralSettings\Traits\WithOptions;
+use ninshikiProject\GeneralSettings\Traits\WithOptions;
 
 enum EmailProviderEnum: string
 {

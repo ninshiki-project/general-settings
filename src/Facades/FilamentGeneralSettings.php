@@ -1,16 +1,17 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Facades;
+namespace ninshikiProject\GeneralSettings\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use ninshikiProject\GeneralSettings\GeneralSettings;
 
 /**
- * @see \Joaopaulolndev\FilamentGeneralSettings\FilamentGeneralSettings
+ * @see \ninshikiProject\GeneralSettings\GeneralSettings
  */
 class FilamentGeneralSettings extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Joaopaulolndev\FilamentGeneralSettings\FilamentGeneralSettings::class;
+        return GeneralSettings::class;
     }
 }

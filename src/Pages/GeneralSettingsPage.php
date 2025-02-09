@@ -1,7 +1,8 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Pages;
+namespace ninshikiProject\GeneralSettings\Pages;
 
+use Exception;
 use Filament\Actions;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Tabs;
@@ -11,32 +12,34 @@ use Filament\Pages\Page;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Joaopaulolndev\FilamentGeneralSettings\Forms\AnalyticsFieldsForm;
-use Joaopaulolndev\FilamentGeneralSettings\Forms\ApplicationFieldsForm;
-use Joaopaulolndev\FilamentGeneralSettings\Forms\EmailFieldsForm;
-use Joaopaulolndev\FilamentGeneralSettings\Forms\SeoFieldsForm;
-use Joaopaulolndev\FilamentGeneralSettings\Forms\SocialNetworkFieldsForm;
-use Joaopaulolndev\FilamentGeneralSettings\Helpers\EmailDataHelper;
-use Joaopaulolndev\FilamentGeneralSettings\Mail\TestMail;
-use Joaopaulolndev\FilamentGeneralSettings\Models\GeneralSetting;
-use Joaopaulolndev\FilamentGeneralSettings\Services\MailSettingsService;
+use ninshikiProject\GeneralSettings\Forms\AnalyticsFieldsForm;
+use ninshikiProject\GeneralSettings\Forms\ApplicationFieldsForm;
+use ninshikiProject\GeneralSettings\Forms\EmailFieldsForm;
+use ninshikiProject\GeneralSettings\Forms\SeoFieldsForm;
+use ninshikiProject\GeneralSettings\Forms\SocialNetworkFieldsForm;
+use ninshikiProject\GeneralSettings\Helpers\EmailDataHelper;
+use ninshikiProject\GeneralSettings\Mail\TestMail;
+use ninshikiProject\GeneralSettings\Models\GeneralSetting;
+use ninshikiProject\GeneralSettings\Services\MailSettingsService;
 
 class GeneralSettingsPage extends Page
 {
-    protected static string $view = 'filament-general-settings::filament.pages.general-settings-page';
+    protected static string $view = 'general-settings::filament.pages.general-settings-page';
+
+    public ?array $data = [];
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function getNavigationGroup(): ?string
     {
-        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+        $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');
 
         return $plugin->getNavigationGroup();
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function getNavigationIcon(): ?string
     {
@@ -59,13 +62,6 @@ class GeneralSettingsPage extends Page
         return $plugin->getCanAccess();
     }
 
-    public function getTitle(): string
-    {
-        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
-
-        return $plugin->getTitle() ?? __('filament-general-settings::default.title');
-    }
-
     public static function getNavigationLabel(): string
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
@@ -80,7 +76,12 @@ class GeneralSettingsPage extends Page
         return $plugin->getNavigationParentItem();
     }
 
-    public ?array $data = [];
+    public function getTitle(): string
+    {
+        $plugin = Filament::getCurrentPanel()?->getPlugin('filament-general-settings');
+
+        return $plugin->getTitle() ?? __('filament-general-settings::default.title');
+    }
 
     public function mount(): void
     {
@@ -168,16 +169,6 @@ class GeneralSettingsPage extends Page
             ->statePath('data');
     }
 
-    protected function getFormActions(): array
-    {
-        return [
-            Actions\Action::make('Save')
-                ->label(__('filament-general-settings::default.save'))
-                ->color('primary')
-                ->submit('Update'),
-        ];
-    }
-
     public function update(): void
     {
         $data = $this->form->getState();
@@ -218,6 +209,14 @@ class GeneralSettingsPage extends Page
         return $data;
     }
 
+    private function successNotification(string $title): void
+    {
+        Notification::make()
+            ->title($title)
+            ->success()
+            ->send();
+    }
+
     public function sendTestMail(MailSettingsService $mailSettingsService): void
     {
         $data = $this->form->getState();
@@ -232,21 +231,13 @@ class GeneralSettingsPage extends Page
                     'subject' => 'This is a test email to verify SMTP settings',
                     'body' => 'This is for testing email using smtp.',
                 ]));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->errorNotification(__('filament-general-settings::default.test_email_error'), $e->getMessage());
 
             return;
         }
 
         $this->successNotification(__('filament-general-settings::default.test_email_success') . $email);
-    }
-
-    private function successNotification(string $title): void
-    {
-        Notification::make()
-            ->title($title)
-            ->success()
-            ->send();
     }
 
     private function errorNotification(string $title, string $body): void
@@ -258,5 +249,15 @@ class GeneralSettingsPage extends Page
             ->danger()
             ->body($body)
             ->send();
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            Actions\Action::make('Save')
+                ->label(__('filament-general-settings::default.save'))
+                ->color('primary')
+                ->submit('Update'),
+        ];
     }
 }

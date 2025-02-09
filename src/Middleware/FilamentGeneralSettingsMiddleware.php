@@ -1,11 +1,11 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Middleware;
+namespace ninshikiProject\GeneralSettings\Middleware;
 
 use Closure;
 use Filament\Support\Facades\FilamentColor;
 use Illuminate\Http\Request;
-use Joaopaulolndev\FilamentGeneralSettings\Models\GeneralSetting;
+use ninshikiProject\GeneralSettings\Models\GeneralSetting;
 use Symfony\Component\HttpFoundation\Response;
 
 class FilamentGeneralSettingsMiddleware
@@ -13,7 +13,7 @@ class FilamentGeneralSettingsMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {

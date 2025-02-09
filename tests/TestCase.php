@@ -1,6 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Tests;
+namespace ninshikiProject\GeneralSettings\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -13,19 +13,29 @@ use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Joaopaulolndev\FilamentGeneralSettings\FilamentGeneralSettingsServiceProvider;
 use Livewire\LivewireServiceProvider;
+use ninshikiProject\GeneralSettings\GeneralSettingsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 
 class TestCase extends Orchestra
 {
+    public function getEnvironmentSetUp($app)
+    {
+        config()->set('database.default', 'testing');
+
+        /*
+        $migration = include __DIR__.'/../database/migrations/create_filament-general-settings_table.php.stub';
+        $migration->up();
+        */
+    }
+
     protected function setUp(): void
     {
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Joaopaulolndev\\FilamentGeneralSettings\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'ninshikiProject\\GeneralSettings\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -44,17 +54,7 @@ class TestCase extends Orchestra
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            FilamentGeneralSettingsServiceProvider::class,
+            GeneralSettingsServiceProvider::class,
         ];
-    }
-
-    public function getEnvironmentSetUp($app)
-    {
-        config()->set('database.default', 'testing');
-
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_filament-general-settings_table.php.stub';
-        $migration->up();
-        */
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings;
+namespace ninshikiProject\GeneralSettings;
 
 use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
-use Joaopaulolndev\FilamentGeneralSettings\Middleware\FilamentGeneralSettingsMiddleware;
-use Joaopaulolndev\FilamentGeneralSettings\Pages\GeneralSettingsPage;
+use ninshikiProject\GeneralSettings\Middleware\FilamentGeneralSettingsMiddleware;
+use ninshikiProject\GeneralSettings\Pages\GeneralSettingsPage;
 
-class FilamentGeneralSettingsPlugin implements Plugin
+class GeneralSettingsPlugin implements Plugin
 {
     use EvaluatesClosures;
 
@@ -26,6 +26,19 @@ class FilamentGeneralSettingsPlugin implements Plugin
     public Closure | string $navigationLabel = '';
 
     public Closure | string $navigationParentItem = '';
+
+    public static function make(): static
+    {
+        return app(static::class);
+    }
+
+    public static function get(): static
+    {
+        /** @var static $plugin */
+        $plugin = filament(app(static::class)->getId());
+
+        return $plugin;
+    }
 
     public function getId(): string
     {
@@ -52,17 +65,9 @@ class FilamentGeneralSettingsPlugin implements Plugin
         //
     }
 
-    public static function make(): static
+    public function getSort(): int
     {
-        return app(static::class);
-    }
-
-    public static function get(): static
-    {
-        /** @var static $plugin */
-        $plugin = filament(app(static::class)->getId());
-
-        return $plugin;
+        return $this->evaluate($this->sort);
     }
 
     public function setSort(Closure | int $value = 100): static
@@ -70,11 +75,6 @@ class FilamentGeneralSettingsPlugin implements Plugin
         $this->sort = $value;
 
         return $this;
-    }
-
-    public function getSort(): int
-    {
-        return $this->evaluate($this->sort);
     }
 
     public function canAccess(Closure | bool $value = true): static
@@ -89,28 +89,14 @@ class FilamentGeneralSettingsPlugin implements Plugin
         return $this->evaluate($this->access);
     }
 
-    public function setIcon(Closure | string $value = ''): static
-    {
-        $this->icon = $value;
-
-        return $this;
-    }
-
     public function getIcon(): ?string
     {
         return ! empty($this->icon) ? $this->evaluate($this->icon) : null;
     }
 
-    public function setNavigationGroup(Closure | string $value = ''): static
+    public function setIcon(Closure | string $value = ''): static
     {
-        $this->navigationGroup = $value;
-
-        return $this;
-    }
-
-    public function setNavigationParentItem(Closure | string $value = ''): static
-    {
-        $this->navigationParentItem = $value;
+        $this->icon = $value;
 
         return $this;
     }
@@ -120,9 +106,9 @@ class FilamentGeneralSettingsPlugin implements Plugin
         return ! empty($this->navigationGroup) ? $this->evaluate($this->navigationGroup) : null;
     }
 
-    public function setTitle(Closure | string $value = ''): static
+    public function setNavigationGroup(Closure | string $value = ''): static
     {
-        $this->title = $value;
+        $this->navigationGroup = $value;
 
         return $this;
     }
@@ -132,9 +118,9 @@ class FilamentGeneralSettingsPlugin implements Plugin
         return ! empty($this->title) ? $this->evaluate($this->title) : null;
     }
 
-    public function setNavigationLabel(Closure | string $value = ''): static
+    public function setTitle(Closure | string $value = ''): static
     {
-        $this->navigationLabel = $value;
+        $this->title = $value;
 
         return $this;
     }
@@ -144,8 +130,22 @@ class FilamentGeneralSettingsPlugin implements Plugin
         return ! empty($this->navigationLabel) ? $this->evaluate($this->navigationLabel) : null;
     }
 
+    public function setNavigationLabel(Closure | string $value = ''): static
+    {
+        $this->navigationLabel = $value;
+
+        return $this;
+    }
+
     public function getNavigationParentItem(): ?string
     {
         return $this->navigationParentItem ?? null;
+    }
+
+    public function setNavigationParentItem(Closure | string $value = ''): static
+    {
+        $this->navigationParentItem = $value;
+
+        return $this;
     }
 }

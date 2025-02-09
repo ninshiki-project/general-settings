@@ -1,6 +1,6 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Helpers;
+namespace ninshikiProject\GeneralSettings\Helpers;
 
 class EmailDataHelper
 {

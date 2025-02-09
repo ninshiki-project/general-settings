@@ -1,9 +1,9 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings\Forms;
+namespace ninshikiProject\GeneralSettings\Forms;
 
 use Filament\Forms\Components\TextInput;
-use Joaopaulolndev\FilamentGeneralSettings\Enums\SocialNetworkEnum;
+use ninshikiProject\GeneralSettings\Enums\SocialNetworkEnum;
 
 class SocialNetworkFieldsForm
 {

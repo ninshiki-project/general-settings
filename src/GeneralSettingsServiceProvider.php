@@ -1,26 +1,25 @@
 <?php
 
-namespace Joaopaulolndev\FilamentGeneralSettings;
+namespace ninshikiProject\GeneralSettings;
 
-use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
-use Joaopaulolndev\FilamentGeneralSettings\Commands\FilamentGeneralSettingsCommand;
-use Joaopaulolndev\FilamentGeneralSettings\Testing\TestsFilamentGeneralSettings;
 use Livewire\Features\SupportTesting\Testable;
+use ninshikiProject\GeneralSettings\Commands\FilamentGeneralSettingsCommand;
+use ninshikiProject\GeneralSettings\Testing\TestsFilamentGeneralSettings;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentGeneralSettingsServiceProvider extends PackageServiceProvider
+class GeneralSettingsServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-general-settings';
+    public static string $name = 'general-settings';
 
-    public static string $viewNamespace = 'filament-general-settings';
+    public static string $viewNamespace = 'general-settings';
 
     public function configurePackage(Package $package): void
     {
@@ -35,8 +34,7 @@ class FilamentGeneralSettingsServiceProvider extends PackageServiceProvider
                 $command
                     ->publishConfigFile()
                     ->publishMigrations()
-                    ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub('joaopaulolndev/filament-general-settings');
+                    ->askToRunMigrations();
             });
 
         $configFileName = $package->shortName();
@@ -62,6 +60,27 @@ class FilamentGeneralSettingsServiceProvider extends PackageServiceProvider
         }
     }
 
+    /**
+     * @return array<class-string>
+     */
+    protected function getCommands(): array
+    {
+        return [
+            FilamentGeneralSettingsCommand::class,
+        ];
+    }
+
+    /**
+     * @return array<string>
+     */
+    protected function getMigrations(): array
+    {
+        return [
+            'create_general-settings_table',
+            'add_logo_favicon_columns_to_general_settings_table',
+        ];
+    }
+
     public function packageRegistered(): void {}
 
     public function packageBooted(): void
@@ -84,8 +103,8 @@ class FilamentGeneralSettingsServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/filament-general-settings/{$file->getFilename()}"),
-                ], 'filament-general-settings-stubs');
+                    $file->getRealPath() => base_path("stubs/{$this->packageName()}/{$file->getFilename()}"),
+                ], 'general-settings-stubs');
             }
         }
 
@@ -93,31 +112,22 @@ class FilamentGeneralSettingsServiceProvider extends PackageServiceProvider
         Testable::mixin(new TestsFilamentGeneralSettings);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    protected function getScriptData(): array
+    {
+        return [];
+    }
+
     protected function getAssetPackageName(): ?string
     {
-        return 'joaopaulolndev/filament-general-settings';
+        return 'ninshikiProject/general-settings';
     }
 
-    /**
-     * @return array<Asset>
-     */
-    protected function getAssets(): array
+    protected function packageName(): string
     {
-        return [
-            // AlpineComponent::make('filament-general-settings', __DIR__ . '/../resources/dist/components/filament-general-settings.js'),
-            Css::make('filament-general-settings-styles', __DIR__ . '/../resources/dist/filament-general-settings.css'),
-            Js::make('filament-general-settings-scripts', __DIR__ . '/../resources/dist/filament-general-settings.js'),
-        ];
-    }
-
-    /**
-     * @return array<class-string>
-     */
-    protected function getCommands(): array
-    {
-        return [
-            FilamentGeneralSettingsCommand::class,
-        ];
+        return static::$name;
     }
 
     /**
@@ -129,29 +139,22 @@ class FilamentGeneralSettingsServiceProvider extends PackageServiceProvider
     }
 
     /**
+     * @return array<Asset>
+     */
+    protected function getAssets(): array
+    {
+        return [
+            // AlpineComponent::make('filament-general-settings', __DIR__ . '/../resources/dist/components/filament-general-settings.js'),
+            Css::make('general-settings-styles', __DIR__ . '/../resources/dist/general-settings.css'),
+            Js::make('general-settings-scripts', __DIR__ . '/../resources/dist/general-settings.js'),
+        ];
+    }
+
+    /**
      * @return array<string>
      */
     protected function getRoutes(): array
     {
         return [];
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    protected function getScriptData(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string>
-     */
-    protected function getMigrations(): array
-    {
-        return [
-            'create_general-settings_table',
-            'add_logo_favicon_columns_to_general_settings_table',
-        ];
     }
 }
