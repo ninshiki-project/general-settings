@@ -42,7 +42,7 @@ class GeneralSettingsPlugin implements Plugin
 
     public function getId(): string
     {
-        return 'filament-general-settings';
+        return 'general-settings';
     }
 
     public function register(Panel $panel): void
