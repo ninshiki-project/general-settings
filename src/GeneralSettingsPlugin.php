@@ -25,7 +25,7 @@ class GeneralSettingsPlugin implements Plugin
 
     public Closure | string $navigationLabel = '';
 
-    public Closure | string $navigationParentItem = '';
+    public Closure | string | null $navigationParentItem = '';
 
     public static function make(): static
     {

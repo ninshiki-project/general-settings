@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use ninshikiProject\GeneralSettings\Forms\AnalyticsFieldsForm;
 use ninshikiProject\GeneralSettings\Forms\ApplicationFieldsForm;
+use ninshikiProject\GeneralSettings\Forms\CustomForms;
 use ninshikiProject\GeneralSettings\Forms\EmailFieldsForm;
 use ninshikiProject\GeneralSettings\Forms\SeoFieldsForm;
 use ninshikiProject\GeneralSettings\Forms\SocialNetworkFieldsForm;
@@ -69,6 +70,9 @@ class GeneralSettingsPage extends Page
         return $plugin->getNavigationLabel() ?? __('general-settings::default.title');
     }
 
+    /**
+     * @throws Exception
+     */
     public static function getNavigationParentItem(): ?string
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('general-settings');

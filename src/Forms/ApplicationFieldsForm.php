@@ -2,7 +2,6 @@
 
 namespace ninshikiProject\GeneralSettings\Forms;
 
-use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
@@ -15,8 +14,7 @@ class ApplicationFieldsForm
         return [
             TextInput::make('site_name')
                 ->label(__('general-settings::default.site_name'))
-                ->autofocus()
-                ->columnSpanFull(),
+                ->autofocus(),
             Textarea::make('site_description')
                 ->label(__('general-settings::default.site_description'))
                 ->columnSpanFull(),

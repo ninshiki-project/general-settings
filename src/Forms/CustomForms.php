@@ -16,7 +16,7 @@ class CustomForms
         $fields = [];
         foreach ($customFields as $fieldKey => $field) {
 
-            if ($field['type'] === TypeFieldEnum::Text->value) {
+            if ($field['type'] === TypeFieldEnum::Text) {
 
                 $fields[] = TextInput::make($fieldKey)
                     ->label(__($field['label']))
@@ -24,12 +24,12 @@ class CustomForms
                     ->required($field['required'])
                     ->rules($field['rules']);
 
-            } elseif ($field['type'] === TypeFieldEnum::Boolean->value) {
+            } elseif ($field['type'] === TypeFieldEnum::Boolean) {
 
                 $fields[] = Checkbox::make($fieldKey)
                     ->label(__($field['label']));
 
-            } elseif ($field['type'] === TypeFieldEnum::Select->value) {
+            } elseif ($field['type'] === TypeFieldEnum::Select) {
 
                 $fields[] = Select::make($fieldKey)
                     ->label(__($field['label']))
@@ -37,14 +37,14 @@ class CustomForms
                     ->options($field['options'])
                     ->required($field['required']);
 
-            } elseif ($field['type'] === TypeFieldEnum::Textarea->value) {
+            } elseif ($field['type'] === TypeFieldEnum::Textarea) {
 
                 $fields[] = Textarea::make($fieldKey)
                     ->label(__($field['label']))
                     ->placeholder(__($field['placeholder']))
                     ->rows($field['rows'])
                     ->required($field['required']);
-            } elseif ($field['type'] === TypeFieldEnum::Datetime->value) {
+            } elseif ($field['type'] === TypeFieldEnum::Datetime) {
 
                 $fields[] = DateTimePicker::make($fieldKey)
                     ->label(__($field['label']))
