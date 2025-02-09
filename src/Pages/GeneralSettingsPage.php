@@ -168,7 +168,8 @@ class GeneralSettingsPage extends Page
         return $form
             ->schema([
                 Tabs::make('Tabs')
-                    ->tabs($arrTabs),
+                    ->tabs($arrTabs)
+                    ->persistTabInQueryString(),
             ])
             ->statePath('data');
     }
