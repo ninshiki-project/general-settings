@@ -7,6 +7,8 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Support\Colors\Color;
 use ninshikiProject\GeneralSettings\Enums\TypeFieldEnum;
 
 class CustomForms
@@ -27,6 +29,15 @@ class CustomForms
             } elseif ($field['type'] === TypeFieldEnum::Boolean) {
 
                 $fields[] = Checkbox::make($fieldKey)
+                    ->label(__($field['label']));
+
+            } elseif ($field['type'] === TypeFieldEnum::Toggle) {
+
+                $fields[] = Toggle::make($fieldKey)
+                    ->onColor(Color::Green)
+                    ->offColor(Color::Red)
+                    ->inline((array_key_exists('required', $field)) ? $field['inline'] : false)
+                    ->rule(array_key_exists('rules', $field) ? $field['rules'] : [])
                     ->label(__($field['label']));
 
             } elseif ($field['type'] === TypeFieldEnum::Select) {
