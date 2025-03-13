@@ -46,7 +46,6 @@ class CustomForms
                     ->label(__($field['label']))
                     ->placeholder(__($field['placeholder']))
                     ->options($field['options'])
-                    ->native(false)
                     ->selectablePlaceholder(false)
                     ->required(array_key_exists('required', $field));
 
