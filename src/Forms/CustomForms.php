@@ -23,6 +23,8 @@ class CustomForms
                 $fields[] = TextInput::make($fieldKey)
                     ->label(__($field['label']))
                     ->placeholder(__($field['placeholder']))
+                    ->hintIcon(array_key_exists('help', $field) ? 'heroicon-m-question-mark-circle' : null)
+                    ->hintIconTooltip(array_key_exists('help', $field) ? $field['help'] : null)
                     ->required(array_key_exists('required', $field))
                     ->rules(array_key_exists('rules', $field) ? $field['rules'] : []);
 
@@ -47,6 +49,8 @@ class CustomForms
                     ->placeholder(__($field['placeholder']))
                     ->options($field['options'])
                     ->selectablePlaceholder(false)
+                    ->hintIcon(array_key_exists('help', $field) ? 'heroicon-m-question-mark-circle' : null)
+                    ->hintIconTooltip(array_key_exists('help', $field) ? $field['help'] : null)
                     ->required(array_key_exists('required', $field));
 
             } elseif ($field['type'] === TypeFieldEnum::Textarea) {
@@ -55,6 +59,8 @@ class CustomForms
                     ->label(__($field['label']))
                     ->placeholder(__($field['placeholder']))
                     ->rows($field['rows'])
+                    ->hintIcon(array_key_exists('help', $field) ? 'heroicon-m-question-mark-circle' : null)
+                    ->hintIconTooltip(array_key_exists('help', $field) ? $field['help'] : null)
                     ->required(array_key_exists('required', $field));
             } elseif ($field['type'] === TypeFieldEnum::Datetime) {
 
